@@ -1,13 +1,13 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import { BrowserRouter } from "react-router-dom";  // ✅ Importar BrowserRouter
+import { BrowserRouter } from "react-router-dom";  // ✅ Router para manejar rutas
 import "./index.css";
-import Prueba from "./prueba.jsx";  
+import App from "./App.jsx";  // ✅ Importar App.jsx para manejar rutas
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <BrowserRouter>  {/* ✅ Envolver con BrowserRouter */}
-      <Prueba />
+    <BrowserRouter>
+      <App /> {/* ✅ Ahora App.jsx maneja las rutas */}
     </BrowserRouter>
   </StrictMode>
 );

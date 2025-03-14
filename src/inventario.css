@@ -1,0 +1,190 @@
+.inventario-container {
+  padding: 20px;
+  text-align: center;
+  background-color: #f4f4f4;
+  min-height: 100vh;
+}
+
+h1 {
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.agregar-btn {
+  background-color: #28a745;
+  color: white;
+  padding: 14px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+  transition: background 0.3s;
+}
+
+.agregar-btn:hover {
+  background-color: #218838;
+}
+
+.inventario-tabla {
+  width: 95%;
+  max-width: 1100px;
+  margin: auto;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+  text-align: center;
+}
+
+.inventario-tabla th {
+  background-color: #007bff;
+  color: white;
+  padding: 15px;
+  font-size: 1.1rem;
+}
+
+.inventario-tabla td {
+  border: 1px solid #ddd;
+  padding: 12px;
+  font-size: 1rem;
+  color: #333;
+  vertical-align: middle;
+}
+
+.inventario-tabla td:nth-child(6) {
+  text-align: center;
+}
+
+.inventario-tabla td:last-child {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.editar-btn, .eliminar-btn {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.editar-btn {
+  background-color: #ffc107;
+}
+
+.eliminar-btn {
+  background-color: #dc3545;
+  color: white;
+}
+
+.editar-btn:hover {
+  background-color: #e0a800;
+}
+
+.eliminar-btn:hover {
+  background-color: #c82333;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: white;
+  padding: 35px;
+  border-radius: 12px;
+  text-align: center;
+  width: 500px;
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+.modal-content h2 {
+  color: black; 
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+}
+
+.modal-content input {
+  width: 92%;
+  padding: 15px;
+  margin: 14px 0;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  background: white;
+  color: #333;
+  display: block;
+  transition: border-color 0.3s;
+}
+
+.modal-content label {
+  display: block;
+  text-align: left;
+  font-weight: bold;
+  margin-bottom: 6px;
+  color: #555;
+}
+
+.modal-content input:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+.guardar-btn {
+  background-color: #28a745;
+  color: white;
+  padding: 14px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  width: 100%;
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-top: 15px;
+  transition: background 0.3s;
+}
+
+.guardar-btn:hover {
+  background-color: #218838;
+}
+
+.cerrar-btn {
+  background-color: #dc3545;
+  color: white;
+  padding: 14px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  width: 100%;
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-top: 10px;
+  transition: background 0.3s;
+}
+
+.cerrar-btn:hover {
+  background-color: #c82333;
+}
+
+@media (max-width: 600px) {
+  .modal-content {
+    width: 90%;
+  }
+
+  .modal-content input {
+    width: 100%;
+  }
+}

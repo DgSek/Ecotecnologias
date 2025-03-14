@@ -1,12 +1,13 @@
 import { Routes, Route } from "react-router-dom";
-import Login from "./login.jsx";
 import Home from "./home.jsx";
-
+import Inventario from "./inventario.jsx";
+import Login from "./login.jsx";
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<Login />} />  {/* ✅ Login es la pantalla inicial */}
-      <Route path="/home" element={<Home />} /> {/* ✅ Home después de iniciar sesión */}
+      <Route path="/" element={<Login />} />  {}
+      <Route path="/home" element={<Home />} />
+      <Route path="/inventario" element={<Inventario />} />
     </Routes>
   );
 }

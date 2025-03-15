@@ -1,108 +1,175 @@
+/* Fondo general y tipografía */
+body {
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+  background: linear-gradient(135deg, #9FC088, #FFD482);
+}
+
+/* Contenedor principal */
 .clientes-container {
-    padding: 20px;
-    text-align: center;
-    background-color: #f4f4f4;
-    min-height: 100vh;
-  }
-  
-  h1 {
-    font-size: 2rem;
-    color: #333;
-    margin-bottom: 20px;
-  }
-  
-  .agregar-btn {
-    background-color: #28a745;
-    color: white;
-    padding: 12px 18px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 1rem;
-    margin-bottom: 15px;
-    transition: background 0.3s;
-  }
-  
-  .agregar-btn:hover {
-    background-color: #218838;
-  }
-  
-  .clientes-tabla {
-    width: 95%;
-    max-width: 1100px;
-    margin: auto;
-    border-collapse: collapse;
-    background: white;
-    border-radius: 10px;
-    overflow: hidden;
-    text-align: center;
-  }
-  
-  .clientes-tabla th {
-    background-color: #007bff;
-    color: white;
-    padding: 15px;
-    font-size: 1.1rem;
-  }
-  
-  .clientes-tabla td {
-    border: 1px solid #ddd;
-    padding: 12px;
-    font-size: 1rem;
-    color: #333;
-    vertical-align: middle;
-  }
-  
-  .clientes-tabla td:last-child {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-  }
-  
-  .editar-btn, .eliminar-btn {
-    padding: 8px 12px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 1rem;
-  }
-  
-  .editar-btn {
-    background-color: #ffc107;
-  }
-  
-  .eliminar-btn {
-    background-color: #dc3545;
-    color: white;
-  }
-  
-  .editar-btn:hover {
-    background-color: #e0a800;
-  }
-  
-  .eliminar-btn:hover {
-    background-color: #c82333;
-  }
-  
-  .modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1000;
-  }
-  
-  .modal-content {
-    background: white;
-    padding: 25px;
-    border-radius: 10px;
-    text-align: center;
-    width: 450px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
-  }
-  
+  padding: 20px;
+  text-align: center;
+  background-color: #f4f4f4;
+  min-height: 100vh;
+}
+
+/* Título principal */
+.clientes-container h1 {
+  font-size: 2rem;
+  color: #3D550C;
+  margin-bottom: 20px;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
+
+/* Botón Agregar Cliente */
+.agregar-btn {
+  background-color: #28a745;
+  color: white;
+  padding: 12px 18px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-bottom: 15px;
+  transition: background 0.3s;
+}
+
+.agregar-btn:hover {
+  background-color: #218838;
+}
+
+/* Tabla de Clientes */
+.clientes-tabla {
+  width: 95%;
+  max-width: 1100px;
+  margin: auto;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+  text-align: center;
+  box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+}
+
+.clientes-tabla th {
+  background-color: #3D550C;
+  color: white;
+  padding: 15px;
+  font-size: 1.1rem;
+}
+
+.clientes-tabla td {
+  border: 1px solid #ddd;
+  padding: 12px;
+  font-size: 1rem;
+  color: #333;
+  vertical-align: middle;
+}
+
+/* Botones de acciones en la tabla */
+.clientes-tabla td:last-child {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.editar-btn, .eliminar-btn {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.editar-btn {
+  background-color: #ffc107;
+  color: #333;
+}
+
+.eliminar-btn {
+  background-color: #dc3545;
+  color: white;
+}
+
+.editar-btn:hover {
+  background-color: #e0a800;
+}
+
+.eliminar-btn:hover {
+  background-color: #c82333;
+}
+
+/* Modal para agregar/editar cliente */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: white;
+  padding: 25px;
+  border-radius: 10px;
+  width: 450px;
+  box-shadow: 0px 4px 10px rgba(0,0,0,0.3);
+  text-align: center;
+}
+
+.modal-content h2 {
+  margin-bottom: 20px;
+  color: #3D550C;
+}
+
+.modal-content input {
+  width: 90%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+/* Botones del modal */
+.modal-btns {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+
+.guardar-btn {
+  background-color: #28a745;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.guardar-btn:hover {
+  background-color: #218838;
+}
+
+.cerrar-btn {
+  background-color: #dc3545;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.cerrar-btn:hover {
+  background-color: #c82333;
+}

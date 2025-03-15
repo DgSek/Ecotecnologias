@@ -34,7 +34,13 @@ const Clientes = () => {
   };
 
   const agregarCliente = async () => {
-    if (!nuevoCliente.nombre || !nuevoCliente.telefono || !nuevoCliente.correo || !nuevoCliente.direccion || !nuevoCliente.rfc) {
+    if (
+      !nuevoCliente.nombre ||
+      !nuevoCliente.telefono ||
+      !nuevoCliente.correo ||
+      !nuevoCliente.direccion ||
+      !nuevoCliente.rfc
+    ) {
       Swal.fire("Error", "Todos los campos son obligatorios.", "error");
       return;
     }
@@ -105,14 +111,19 @@ const Clientes = () => {
               <td>{cliente.correo}</td>
               <td>{cliente.direccion}</td>
               <td>
-                <button className="editar-btn" onClick={() => {
-                  setNuevoCliente(cliente);
-                  setEditando(cliente.id);
-                  setMostrarModal(true);
-                }}>
+                <button
+                  className="editar-btn"
+                  onClick={() => {
+                    setNuevoCliente(cliente);
+                    setEditando(cliente.id);
+                    setMostrarModal(true);
+                  }}
+                >
                   Editar
                 </button>
-                <button className="eliminar-btn" onClick={() => eliminarCliente(cliente.id)}>Eliminar</button>
+                <button className="eliminar-btn" onClick={() => eliminarCliente(cliente.id)}>
+                  Eliminar
+                </button>
               </td>
             </tr>
           ))}
@@ -123,18 +134,60 @@ const Clientes = () => {
         <div className="modal">
           <div className="modal-content">
             <h2>{editando ? "Editar Cliente" : "Agregar Cliente"}</h2>
-            <input type="text" name="nombre" placeholder="Nombre" value={nuevoCliente.nombre} onChange={handleChange} required />
-            <input type="text" name="rfc" placeholder="RFC" value={nuevoCliente.rfc} onChange={handleChange} required />
-            <input type="text" name="telefono" placeholder="Teléfono" value={nuevoCliente.telefono} onChange={handleChange} required />
-            <input type="email" name="correo" placeholder="Correo" value={nuevoCliente.correo} onChange={handleChange} required />
-            <input type="text" name="direccion" placeholder="Dirección" value={nuevoCliente.direccion} onChange={handleChange} required />
-            <button className="guardar-btn" onClick={agregarCliente}>
-              {editando ? "Actualizar" : "Guardar"}
-            </button>
-            <button className="cerrar-btn" onClick={() => {
-              setMostrarModal(false);
-              setEditando(null);
-            }}>Cancelar</button>
+            <input
+              type="text"
+              name="nombre"
+              placeholder="Nombre"
+              value={nuevoCliente.nombre}
+              onChange={handleChange}
+              required
+            />
+            <input
+              type="text"
+              name="rfc"
+              placeholder="RFC"
+              value={nuevoCliente.rfc}
+              onChange={handleChange}
+              required
+            />
+            <input
+              type="text"
+              name="telefono"
+              placeholder="Teléfono"
+              value={nuevoCliente.telefono}
+              onChange={handleChange}
+              required
+            />
+            <input
+              type="email"
+              name="correo"
+              placeholder="Correo"
+              value={nuevoCliente.correo}
+              onChange={handleChange}
+              required
+            />
+            <input
+              type="text"
+              name="direccion"
+              placeholder="Dirección"
+              value={nuevoCliente.direccion}
+              onChange={handleChange}
+              required
+            />
+            <div className="modal-btns">
+              <button className="guardar-btn" onClick={agregarCliente}>
+                {editando ? "Actualizar" : "Guardar"}
+              </button>
+              <button
+                className="cerrar-btn"
+                onClick={() => {
+                  setMostrarModal(false);
+                  setEditando(null);
+                }}
+              >
+                Cancelar
+              </button>
+            </div>
           </div>
         </div>
       )}

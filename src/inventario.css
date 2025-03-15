@@ -1,190 +1,213 @@
+/* ====================  FONDO & TIPOGRAFÍA  ==================== */
+body {
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+  /* Gradiente ecológico, coherente con otras pantallas */
+  background: linear-gradient(135deg, #9FC088, #FFD482);
+}
+
+/* ====================  CONTENEDOR PRINCIPAL  ==================== */
 .inventario-container {
-  padding: 20px;
-  text-align: center;
-  background-color: #f4f4f4;
+  padding: 30px;
+  /* Eliminamos el color de fondo sólido para que el gradiente sea visible */
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-h1 {
-  font-size: 2rem;
-  color: #333;
-  margin-bottom: 20px;
+/* TÍTULO PRINCIPAL */
+.inventario-container h1 {
+  font-size: 2.5rem;
+  color: #3D550C; /* Verde oscuro */
+  margin-bottom: 30px;
+  font-weight: 500;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
 }
 
+/* ====================  BOTÓN AGREGAR PRODUCTO  ==================== */
 .agregar-btn {
-  background-color: #28a745;
-  color: white;
-  padding: 14px 20px;
+  background-color: #3D550C;
+  color: #fff;
+  padding: 14px 25px;
   border: none;
   border-radius: 8px;
-  cursor: pointer;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   font-weight: bold;
-  margin-bottom: 20px;
-  transition: background 0.3s;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-bottom: 30px;
 }
 
 .agregar-btn:hover {
-  background-color: #218838;
+  background-color: #2c3e1a;
 }
 
+/* ====================  TABLA DE INVENTARIO  ==================== */
 .inventario-tabla {
   width: 95%;
-  max-width: 1100px;
-  margin: auto;
-  border-collapse: collapse;
-  background: white;
-  border-radius: 10px;
+  max-width: 1200px;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-collapse: separate;
+  border-spacing: 0;
   overflow: hidden;
-  text-align: center;
+  margin-bottom: 40px;
+  text-align: left;
 }
 
+/* ENCABEZADOS DE TABLA */
 .inventario-tabla th {
-  background-color: #007bff;
-  color: white;
-  padding: 15px;
+  background-color: #3D550C; /* Verde oscuro */
+  color: #fff;
+  padding: 16px;
   font-size: 1.1rem;
 }
 
+/* CELDAS DE TABLA */
 .inventario-tabla td {
-  border: 1px solid #ddd;
-  padding: 12px;
+  border-top: 1px solid #eee;
+  padding: 16px;
   font-size: 1rem;
-  color: #333;
+  color: #555;
   vertical-align: middle;
 }
 
-.inventario-tabla td:nth-child(6) {
+/* EFECTO HOVER EN FILAS */
+.inventario-tabla tbody tr:hover {
+  background-color: #f1f1f1;
+}
+
+/* COLUMNA DE ACCIONES */
+.inventario-tabla td:last-child {
   text-align: center;
 }
 
-.inventario-tabla td:last-child {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
+.inventario-tabla td:last-child button {
+  margin: 0 5px;
 }
 
+/* ====================  BOTONES DE ACCIÓN  ==================== */
 .editar-btn, .eliminar-btn {
-  padding: 8px 12px;
+  padding: 8px 14px;
   border: none;
-  border-radius: 5px;
+  border-radius: 6px;
+  font-size: 0.9rem;
   cursor: pointer;
-  font-size: 1rem;
+  transition: background-color 0.3s;
 }
 
 .editar-btn {
   background-color: #ffc107;
-}
-
-.eliminar-btn {
-  background-color: #dc3545;
-  color: white;
+  color: #333;
 }
 
 .editar-btn:hover {
   background-color: #e0a800;
 }
 
+.eliminar-btn {
+  background-color: #dc3545;
+  color: #fff;
+}
+
 .eliminar-btn:hover {
   background-color: #c82333;
 }
 
+/* ====================  MODAL (AGREGAR/EDITAR)  ==================== */
 .modal {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.55);
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   z-index: 1000;
 }
 
+/* CONTENIDO DEL MODAL */
 .modal-content {
-  background: white;
-  padding: 35px;
+  background: #fff;
   border-radius: 12px;
-  text-align: center;
+  padding: 40px 30px;
   width: 500px;
-  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3);
+  max-width: 95%;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  text-align: center;
 }
 
 .modal-content h2 {
-  color: black; 
-  font-size: 1.8rem;
-  margin-bottom: 20px;
+  margin-bottom: 25px;
+  font-size: 2rem;
+  color: #3D550C; /* Verde oscuro */
+  font-weight: 500;
 }
 
+/* CAMPOS DE TEXTO */
 .modal-content input {
-  width: 92%;
-  padding: 15px;
-  margin: 14px 0;
-  border: 2px solid #ccc;
+  width: 90%;
+  padding: 14px;
+  margin: 10px auto;
+  border: 2px solid #ddd;
   border-radius: 8px;
   font-size: 1rem;
-  background: white;
-  color: #333;
-  display: block;
   transition: border-color 0.3s;
-}
-
-.modal-content label {
   display: block;
-  text-align: left;
-  font-weight: bold;
-  margin-bottom: 6px;
-  color: #555;
+  color: #333;
+  background-color: #fff;
 }
 
 .modal-content input:focus {
-  border-color: #007bff;
+  border-color: #3D550C;
   outline: none;
 }
 
-.guardar-btn {
-  background-color: #28a745;
-  color: white;
+/* BOTONES DEL MODAL */
+.guardar-btn, .cerrar-btn {
+  width: 90%;
   padding: 14px;
+  margin: 15px auto;
   border: none;
   border-radius: 8px;
-  cursor: pointer;
-  width: 100%;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   font-weight: bold;
-  margin-top: 15px;
-  transition: background 0.3s;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+/* BOTÓN GUARDAR/ACTUALIZAR */
+.guardar-btn {
+  background-color: #3D550C;
+  color: #fff;
 }
 
 .guardar-btn:hover {
-  background-color: #218838;
+  background-color: #2c3e1a;
 }
 
+/* BOTÓN CANCELAR */
 .cerrar-btn {
   background-color: #dc3545;
-  color: white;
-  padding: 14px;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  width: 100%;
-  font-size: 1.2rem;
-  font-weight: bold;
-  margin-top: 10px;
-  transition: background 0.3s;
+  color: #fff;
 }
 
 .cerrar-btn:hover {
   background-color: #c82333;
 }
 
+/* ====================  RESPONSIVE  ==================== */
 @media (max-width: 600px) {
   .modal-content {
     width: 90%;
+    padding: 30px 20px;
   }
-
-  .modal-content input {
-    width: 100%;
+  
+  .inventario-tabla th, .inventario-tabla td {
+    padding: 12px;
   }
 }

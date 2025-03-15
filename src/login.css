@@ -1,72 +1,111 @@
+/* Reset básico y fuente general */
+body {
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+  /* Fondo con un degradado que combine tonos verdes y dorados */
+  background: linear-gradient(135deg, #9FC088, #FFD482);
+  display: block;
+}
 
+/* Contenedor principal centrado y responsivo */
 .login-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw; 
-    height: 100vh; 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw; 
+  height: 100vh; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+}
+
+/* Caja de login con fondo semitransparente, bordes redondeados y animación */
+.login-box {
+  background: rgba(255, 255, 255, 0.95);
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.15);
+  text-align: center;
+  max-width: 400px;
+  width: 100%;
+  animation: fadeIn 0.8s ease-in-out;
+}
+
+/* Animación para una entrada suave */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Título con tono verde oscuro */
+.login-box h2 {
+  font-size: 1.8rem;
+  color: #3D550C; /* Verde oscuro */
+  margin-bottom: 0.5rem;
+  font-family: "Georgia", serif;
+}
+
+/* Subtítulo */
+.login-box p {
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 1.5rem;
+}
+
+/* Estilos para los inputs con transición y efecto focus */
+.login-box input {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 1rem;
+  transition: border 0.3s ease;
   
-  .login-box {
-    background: rgba(255, 255, 255, 0.9);
-    padding: 2rem;
-    border-radius: 10px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
-    text-align: center;
-    max-width: 400px;
-    width: 90%;
-  }
-  
-  /* Evitar que haya margen automático que interfiera */
-  body {
-    margin: 0;
-    display: block;
-  }
-  
-  
-  /* Estilos del título */
-  .login-box h2 {
-    font-size: 1.8rem;
-    color: #8B4513;
-    font-family: "Georgia", serif;
-  }
-  
-  /* Estilos del subtítulo */
-  .login-box p {
-    font-size: 1rem;
-    color: #555;
-  }
-  
-  .login-box input {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    font-size: 1rem;
-  }
-  
-  .login-box button {
-    background-color: #8B4513;
-    color: white;
-    border: none;
-    padding: 10px;
-    font-size: 1.2rem;
-    border-radius: 5px;
-    cursor: pointer;
-    width: 100%;
-    transition: background 0.3s ease-in-out;
-  }
-  
-  .login-box button:hover {
-    background-color: #A0522D;
-  }
-  
-  .error {
-    color: red;
-    margin-top: 10px;
-  }
-  
+  /* Texto en negro, fondo blanco */
+  color: #000; 
+  background-color: #fff;
+}
+
+/* Efecto focus */
+.login-box input:focus {
+  outline: none;
+  border: 1px solid #3D550C; /* mismo tono verde */
+}
+
+/* Sobrescribir estilos de autocompletado (Chrome, etc.) */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+  -webkit-text-fill-color: #000;
+  -webkit-box-shadow: 0 0 0px 1000px #fff inset;
+  box-shadow: 0 0 0px 1000px #fff inset;
+  border: 1px solid #ddd;
+}
+
+/* Botón de envío con hover y transición para suavizar el cambio */
+.login-box button {
+  background-color: #3D550C; /* Verde oscuro */
+  color: white;
+  border: none;
+  padding: 10px;
+  font-size: 1.2rem;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100%;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  margin-top: 10px;
+}
+
+.login-box button:hover {
+  background-color: #557C2B; /* Tono verde un poco más claro */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Estilo para el mensaje de error */
+.error {
+  color: red;
+  margin-top: 10px;
+  font-size: 0.9rem;
+}

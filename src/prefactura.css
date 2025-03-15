@@ -1,79 +1,145 @@
-.prefactura-container {
-    text-align: center;
-    padding: 20px;
-    background-color: #f4f4f4;
-    min-height: 100vh;
+/* Fondo con gradiente ecológico */
+body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #9FC088, #FFD482);
+  }
+  
+  /* Contenedor principal */
+  .prefactura-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-
-/* Contenedor de la tabla con scroll */
-.tabla-container {
+    min-height: 100vh;
+    padding: 20px;
+  }
+  
+  /* Título principal */
+  .prefactura-container h1 {
+    font-size: 2rem;
+    color: #3D550C;
+    margin-bottom: 30px;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+  }
+  
+  /* Contenedor de la tabla con scroll */
+  .tabla-container {
     width: 90%;
-    max-height: 400px; /* Scroll cuando haya muchas ventas */
-    overflow-y: auto;
+    max-width: 1200px;
+    background: #fff;
     border-radius: 10px;
-}
-
-/* Tabla */
-.prefactura-tabla {
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+    overflow-y: auto;
+    max-height: 500px;
+    padding: 20px;
+  }
+  
+  /* Tabla */
+  .prefactura-tabla {
     width: 100%;
     border-collapse: collapse;
-    background: white;
-    border-radius: 10px;
     text-align: center;
-}
-
-.prefactura-tabla th, .prefactura-tabla td {
+  }
+  
+  .prefactura-tabla thead th {
+    background-color: #3D550C;
+    color: white;
+    font-size: 1rem;
+    padding: 15px;
+  }
+  
+  .prefactura-tabla th,
+  .prefactura-tabla td {
     border: 1px solid #ddd;
     padding: 12px;
     font-size: 1rem;
     color: #333;
-}
-
-.prefactura-tabla th {
-    background-color: #007bff;
-    color: white;
-    padding: 15px;
-}
-
-/* Icono de Factura */
-.prefactura-tabla td.factura-icon {
+  }
+  
+  /* Icono de Factura */
+  .prefactura-tabla td.factura-icon {
     font-size: 1.5rem;
-}
-
-/* Resaltar fila seleccionada */
-.fila-seleccionada {
+  }
+  
+  /* Resaltar fila seleccionada */
+  .fila-seleccionada {
     background-color: #d4edda !important;
     font-weight: bold;
-}
-
-/* Lista dentro de la columna Descripción */
-.descripcion-lista {
+  }
+  
+  /* Lista en la columna Descripción */
+  .descripcion-lista {
     list-style: none;
     padding: 0;
     margin: 0;
-}
-
-.descripcion-lista li {
     text-align: left;
-    padding: 2px 0;
-}
-
-/* Botón de generar factura */
-.generar-factura-btn {
-    margin-top: 15px;
-    padding: 10px 20px;
+  }
+  
+  /* Botón de generar factura */
+  .generar-factura-btn {
+    margin-top: 20px;
+    padding: 15px 30px;
     font-size: 1.2rem;
-    background-color: #28a745;
-    color: white;
+    background-color: #FFD482;
+    color: #3D550C;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    transition: background 0.3s;
-}
-
-.generar-factura-btn:hover {
-    background-color: #218838;
-}
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  
+  .generar-factura-btn:hover {
+    background-color: #FFB200;
+    transform: scale(1.02);
+  }
+  
+  /* Scrollbar personalizado (opcional) */
+  .tabla-container::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  .tabla-container::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 5px;
+  }
+  
+  .tabla-container::-webkit-scrollbar-thumb {
+    background: #3D550C;
+    border-radius: 5px;
+  }
+  
+  /* Estilos personalizados para el pop-up de SweetAlert2 */
+  .prefactura-popup {
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+  }
+  
+  .prefactura-popup-title {
+    font-size: 1.8rem;
+    color: #3D550C;
+  }
+  
+  .prefactura-confirm-btn {
+    background-color: #FFD482;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin: 10px;
+  }
+  
+  .prefactura-cancel-btn {
+    background-color: #d9534f;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin: 10px;
+  }
+  

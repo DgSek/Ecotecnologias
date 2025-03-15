@@ -183,7 +183,7 @@ const Venta = () => {
                     </div>
                     <hr />
                     <div className="producto-section">
-                        <h3>Productos</h3>
+                        <h3>Agregar Productos</h3>
                         <select value={productoSeleccionado} onChange={(e) => setProductoSeleccionado(e.target.value)}>
                             <option value="">Seleccionar Producto</option>
                             {productos.map((producto) => (
@@ -231,17 +231,28 @@ const Venta = () => {
                                         <td>{producto.cantidad}</td>
                                         <td>${producto.precio.toFixed(2)}</td>
                                         <td>${(producto.precio * producto.cantidad).toFixed(2)}</td>
-                                        <td><button className="eliminar-btn" onClick={() => eliminarProducto(producto.id)}>❌</button></td>
+                                        <td>
+                                            <button
+                                                className="eliminar-btn"
+                                                onClick={() => eliminarProducto(producto.id)}
+                                            >
+                                                ❌
+                                            </button>
+                                        </td>
                                     </tr>
                                 ))}
                                 {[...Array(10 - carrito.length)].map((_, index) => (
-                                    <tr key={`empty-${index}`} className="empty-row"><td colSpan="5"></td></tr>
+                                    <tr key={`empty-${index}`} className="empty-row">
+                                        <td colSpan="5"></td>
+                                    </tr>
                                 ))}
                             </tbody>
                         </table>
                     </div>
-                    <h2 style={{ color: "#333" }}>Total: ${calcularTotal().toFixed(2)}</h2>
-                    <button className="registrar-venta-btn" onClick={registrarVenta}>Registrar Venta</button>
+                    <h2>Total: ${calcularTotal().toFixed(2)}</h2>
+                    <button className="registrar-venta-btn" onClick={registrarVenta}>
+                        Registrar Venta
+                    </button>
                 </div>
             </div>
         </div>

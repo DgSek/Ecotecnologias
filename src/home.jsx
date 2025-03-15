@@ -19,7 +19,7 @@ const Home = () => {
                     <p>Punto de Venta</p>
                 </div>
 
-                {/* Prefacturación - Aquí agregamos la lógica */}
+                {/* Pre-facturación */}
                 <div className="grid-item" onClick={() => navigate("/prefactura")}>
                     <img src={invoiceIcon} alt="Pre-facturación" />
                     <p>Pre-facturación</p>

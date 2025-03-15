@@ -1,171 +1,98 @@
-.venta-container {
-    text-align: center;
+/* Fondo general con un gradiente suave verde-dorado */
+body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #9FC088, #FFD482);
+  }
+  
+  /* Contenedor principal: centra vertical y horizontalmente */
+  .venta-container {
+    display: flex;
+    justify-content: center; 
+    align-items: center;     
+    min-height: 100vh;       /* Ocupa la altura completa de la ventana */
     padding: 20px;
-    background-color: #f4f4f4;
-    min-height: 100vh;
+  }
+  
+  /* Contenido general: barra lateral y detalle de venta */
+  .venta-content {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.venta-content {
-    display: flex;
-    justify-content: space-between;
+    gap: 20px;
     width: 95%;
-    height: calc(100vh - 60px);
-    gap: 20px;
-}
-
-/* Estilos de la barra lateral (Clientes y Productos) */
-.sidebar {
-    background: white;
+    max-width: 1400px;
+    margin: 0 auto;
+    flex-wrap: wrap; 
+    align-items: stretch; /* <--- Estira ambos contenedores a la misma altura */
+  }
+  
+  /* BARRA LATERAL */
+  .sidebar {
+    background: #fff;
     padding: 20px;
     border-radius: 10px;
-    width: 28%;
-    height: 97%;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+    width: 350px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-h3 {
+    flex-shrink: 0;
+    /* Si no quieres margen extra en pantallas pequeñas, comenta o elimina la siguiente línea */
+    /* margin-bottom: 20px; */
+  }
+  
+  /* Títulos dentro de la barra lateral */
+  .sidebar h3 {
     font-size: 1.2rem;
     margin-bottom: 10px;
-    color: #333;
-}
-
-/* Sección de Cliente */
-.cliente-section select,
-.cliente-section input {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 1rem;
-    background: white;
-    color: #333;
-    margin-bottom: 10px;
-}
-
-/* Ajuste del tamaño de los selects */
-select, input {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 1rem;
-    background: white;
-    color: #333;
-}
-
-.agregar-producto-btn {
-    width: 100%;
-    padding: 10px;
-    margin-top: 10px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 1rem;
-}
-
-.agregar-producto-btn:hover {
-    background-color: #0056b3;
-}
-
-/* Sección de la tabla de venta */
-.venta-detalle {
-    flex-grow: 1;
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 97%;
-    width: 70%;
-}
-
-.venta-detalle h1 {
-    text-align: center;
-    margin-bottom: 10px;
-    font-size: 1.8rem;
-    color: #333;
-}
-
-.venta-tabla-container {
-    overflow-y: hidden;
-    max-height: 400px;
-}
-
-.venta-tabla {
-    width: 100%;
-    border-collapse: collapse;
+    color: #3D550C; /* Verde oscuro */
+    text-align: left;
+  }
+  
+  /* Sección de Cliente y Producto */
+  .cliente-section,
+  .producto-section {
     margin-bottom: 20px;
-}
-
-.venta-tabla th, .venta-tabla td {
-    border: 1px solid #ddd;
-    padding: 12px;
-    text-align: center;
-    color: #333;
-    height: 45px;
-}
-
-.venta-tabla th {
-    background-color: #007bff;
-    color: white;
-}
-
-/* Estilo uniforme para las filas vacías */
-.empty-row td {
-    height: 45px;
-    background-color: #f9f9f9;
-}
-
-.eliminar-btn {
-    padding: 6px 10px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    background-color: #dc3545;
-    color: white;
-    font-size: 1rem;
-}
-
-.eliminar-btn:hover {
-    background-color: #c82333;
-}
-
-.registrar-venta-btn {
+  }
+  
+  .cliente-section select,
+  .cliente-section input,
+  .producto-section select {
     width: 100%;
     padding: 12px;
-    background-color: #28a745;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    background: #fff;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  /* Botón para agregar producto */
+  .agregar-producto-btn {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    background-color: #3D550C; /* Verde oscuro */
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 1.2rem;
-}
-
-.registrar-venta-btn:hover {
-    background-color: #218838;
-}
-
-/* Mejorar la separación visual */
-hr {
+    font-size: 1rem;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  
+  .agregar-producto-btn:hover {
+    background-color: #557C2B;
+    transform: scale(1.02);
+  }
+  
+  /* Separador */
+  hr {
     border: 0;
     height: 1px;
     background: #ccc;
     margin: 15px 0;
-}
-
-/* Campo de cantidad de producto */
-/* Estilo mejorado para el input de cantidad */
-.cantidad-container {
+  }
+  
+  /* Campo de cantidad (más amigable y grande) */
+  .cantidad-container {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -176,10 +103,10 @@ hr {
     overflow: hidden;
     margin-top: 10px;
     box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.15);
-}
-
-.cantidad-btn {
-    background-color: #007bff;
+  }
+  
+  .cantidad-btn {
+    background-color: #3D550C;
     color: white;
     border: none;
     padding: 10px 16px;
@@ -188,14 +115,14 @@ hr {
     font-weight: bold;
     transition: 0.3s ease;
     outline: none;
-}
-
-.cantidad-btn:hover {
-    background-color: #0056b3;
-}
-
-.cantidad-input {
-    width: 50px;
+  }
+  
+  .cantidad-btn:hover {
+    background-color: #557C2B;
+  }
+  
+  .cantidad-input {
+    width: 60px;
     text-align: center;
     font-size: 1.2rem;
     padding: 10px;
@@ -204,20 +131,117 @@ hr {
     background: white;
     color: #333;
     font-weight: bold;
-}
-/* Eliminar las flechas del input de número en Chrome, Safari, Edge y Opera */
-.cantidad-input::-webkit-outer-spin-button,
-.cantidad-input::-webkit-inner-spin-button {
+  }
+  
+  /* Eliminar flechas de los input number en Chrome, Safari, Edge y Opera */
+  .cantidad-input::-webkit-outer-spin-button,
+  .cantidad-input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
-}
-
-/* Eliminar las flechas del input de número en Firefox */
-.cantidad-input {
+  }
+  
+  /* Eliminar flechas de los input number en Firefox */
+  .cantidad-input {
     -moz-appearance: textfield;
-}
-h2 {
-    color: #333; /* Negro */
-}
-
-
+  }
+  
+  /* DETALLE DE VENTA */
+  .venta-detalle {
+    flex: 1; /* Se expande para ocupar el resto del espacio */
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    min-width: 320px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  /* Encabezado principal */
+  .venta-detalle h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 2rem;
+    color: #3D550C;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Contenedor de la tabla */
+  .venta-tabla-container {
+    overflow-y: auto; 
+    max-height: 400px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+  }
+  
+  /* Tabla de productos */
+  .venta-tabla {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .venta-tabla thead th {
+    background-color: #3D550C;
+    color: white;
+    font-size: 1rem;
+  }
+  
+  .venta-tabla th,
+  .venta-tabla td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: center;
+    color: #333;
+    height: 50px;
+    font-size: 1rem;
+  }
+  
+  /* Filas vacías */
+  .empty-row td {
+    background-color: #f9f9f9;
+  }
+  
+  /* Botón de eliminar producto */
+  .eliminar-btn {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #dc3545;
+    color: white;
+    font-size: 1rem;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  
+  .eliminar-btn:hover {
+    background-color: #c82333;
+    transform: scale(1.05);
+  }
+  
+  /* Total y botón de Registrar Venta */
+  .venta-detalle h2 {
+    color: #3D550C;
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    text-align: right;
+  }
+  
+  .registrar-venta-btn {
+    width: 100%;
+    padding: 15px;
+    background-color: #FFD482; /* Dorado suave */
+    color: #3D550C;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  
+  .registrar-venta-btn:hover {
+    background-color: #FFB200; /* Dorado más intenso */
+    transform: scale(1.02);
+  }
+  

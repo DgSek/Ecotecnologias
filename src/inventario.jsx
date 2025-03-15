@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { collection, getDocs, addDoc, deleteDoc, doc } from "firebase/firestore";
-import { db } from "./DB/firebaseConfig";
+import { reauthenticateWithCredential, EmailAuthProvider } from "firebase/auth";
+import Swal from "sweetalert2";
+import { db, auth } from "./DB/firebaseConfig";
 import "./inventario.css";
 
 const Inventario = () => {
@@ -12,7 +14,7 @@ const Inventario = () => {
     cantidad: 0,
     categoria: "",
     precio: 0,
-    fecha_ingreso: new Date().toISOString().split("T")[0], //fecha actual del sistema
+    fecha_ingreso: new Date().toISOString().split("T")[0],
   });
 
   useEffect(() => {
@@ -30,8 +32,7 @@ const Inventario = () => {
 
   const handleChange = (e) => {
     let { name, value } = e.target;
-    
-    //convierte cantidad y precio a número y evitar valores negativos
+
     if (name === "cantidad" || name === "precio") {
       value = Number(value);
       if (value < 0) value = 0;
@@ -45,18 +46,93 @@ const Inventario = () => {
 
   const agregarProducto = async () => {
     if (!nuevoProducto.nombre || nuevoProducto.cantidad < 0 || nuevoProducto.precio < 0) {
-      alert("Todos los campos son obligatorios y no pueden ser negativos.");
+      Swal.fire({
+        title: "🚨 ¡Error!",
+        text: "Todos los campos son obligatorios y no pueden ser negativos.",
+        icon: "error",
+        confirmButtonText: "Entendido",
+        confirmButtonColor: "#d33",
+        background: "#fff3cd",
+        color: "#856404",
+      });
       return;
     }
 
     await addDoc(collection(db, "inventario"), nuevoProducto);
+    setProductos([...productos, nuevoProducto]);
     setMostrarModal(false);
-    window.location.reload();
+
+    Swal.fire({
+      title: "🎉 ¡Producto Agregado!",
+      html: `<div style="font-size: 1.2rem; font-weight: bold;">
+               <span style="color: #28a745;">✔</span> <strong>${nuevoProducto.nombre}</strong> fue agregado con éxito.
+             </div>`,
+      icon: "success",
+      confirmButtonColor: "#28a745",
+      confirmButtonText: "Genial 🚀",
+      background: "#eaffea",
+      color: "#155724",
+      timer: 2500,
+    });
+
+    setNuevoProducto({
+      nombre: "",
+      descripcion: "",
+      cantidad: 0,
+      categoria: "",
+      precio: 0,
+      fecha_ingreso: new Date().toISOString().split("T")[0],
+    });
   };
 
   const eliminarProducto = async (id) => {
-    await deleteDoc(doc(db, "inventario", id));
-    window.location.reload();
+    const user = auth.currentUser; // Obtener el usuario autenticado
+    if (!user) {
+      Swal.fire({
+        title: "⚠️ Error",
+        text: "No hay un usuario autenticado.",
+        icon: "error",
+        confirmButtonText: "OK",
+      });
+      return;
+    }
+
+    Swal.fire({
+      title: "🔑 Autenticación Requerida",
+      text: "Ingrese la contraseña del responsable para eliminar este producto.",
+      input: "password",
+      inputPlaceholder: "Contraseña",
+      inputAttributes: {
+        autocapitalize: "off",
+      },
+      showCancelButton: true,
+      confirmButtonText: "Confirmar",
+      cancelButtonText: "Cancelar",
+      showLoaderOnConfirm: true,
+      preConfirm: async (password) => {
+        const credential = EmailAuthProvider.credential(user.email, password);
+        try {
+          await reauthenticateWithCredential(user, credential); // ✅ Usar reautenticación
+          return true;
+        } catch (error) {
+          Swal.showValidationMessage("⚠️ Contraseña incorrecta");
+          return false;
+        }
+      },
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        await deleteDoc(doc(db, "inventario", id));
+        setProductos(productos.filter((producto) => producto.id !== id));
+
+        Swal.fire({
+          title: "✅ Eliminado",
+          text: "El producto ha sido eliminado correctamente.",
+          icon: "success",
+          confirmButtonText: "OK",
+          confirmButtonColor: "#28a745",
+        });
+      }
+    });
   };
 
   return (
@@ -89,14 +165,15 @@ const Inventario = () => {
               <td>{producto.fecha_ingreso}</td>
               <td>
                 <button className="editar-btn">Editar</button>
-                <button className="eliminar-btn" onClick={() => eliminarProducto(producto.id)}>Eliminar</button>
+                <button className="eliminar-btn" onClick={() => eliminarProducto(producto.id)}>
+                  Eliminar
+                </button>
               </td>
             </tr>
           ))}
         </tbody>
       </table>
 
-      {/* Modal para agregar producto */}
       {mostrarModal && (
         <div className="modal">
           <div className="modal-content">

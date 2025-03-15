@@ -1,0 +1,79 @@
+.prefactura-container {
+    text-align: center;
+    padding: 20px;
+    background-color: #f4f4f4;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Contenedor de la tabla con scroll */
+.tabla-container {
+    width: 90%;
+    max-height: 400px; /* Scroll cuando haya muchas ventas */
+    overflow-y: auto;
+    border-radius: 10px;
+}
+
+/* Tabla */
+.prefactura-tabla {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.prefactura-tabla th, .prefactura-tabla td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    font-size: 1rem;
+    color: #333;
+}
+
+.prefactura-tabla th {
+    background-color: #007bff;
+    color: white;
+    padding: 15px;
+}
+
+/* Icono de Factura */
+.prefactura-tabla td.factura-icon {
+    font-size: 1.5rem;
+}
+
+/* Resaltar fila seleccionada */
+.fila-seleccionada {
+    background-color: #d4edda !important;
+    font-weight: bold;
+}
+
+/* Lista dentro de la columna Descripción */
+.descripcion-lista {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.descripcion-lista li {
+    text-align: left;
+    padding: 2px 0;
+}
+
+/* Botón de generar factura */
+.generar-factura-btn {
+    margin-top: 15px;
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.generar-factura-btn:hover {
+    background-color: #218838;
+}

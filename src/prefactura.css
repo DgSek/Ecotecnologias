@@ -2,8 +2,9 @@
 body {
     margin: 0;
     font-family: 'Arial', sans-serif;
-    background: linear-gradient(135deg, #9FC088, #FFD482);
+    background: linear-gradient(135deg, #9fff9f, rgb(31, 99, 0));
   }
+
   
   /* Contenedor principal */
   .prefactura-container {

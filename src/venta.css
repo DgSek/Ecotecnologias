@@ -1,9 +1,5 @@
 /* Fondo general con un gradiente suave verde-dorado */
-body {
-    margin: 0;
-    font-family: 'Arial', sans-serif;
-    background: linear-gradient(135deg, #9FC088, #FFD482);
-  }
+
   
   /* Contenedor principal: centra vertical y horizontalmente */
   .venta-container {

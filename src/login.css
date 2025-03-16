@@ -1,111 +1,169 @@
-/* Reset básico y fuente general */
+/* Fondo general */
 body {
   margin: 0;
   font-family: 'Arial', sans-serif;
-  /* Fondo con un degradado que combine tonos verdes y dorados */
-  background: linear-gradient(135deg, #9FC088, #FFD482);
-  display: block;
-}
-
-/* Contenedor principal centrado y responsivo */
-.login-container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw; 
-  height: 100vh; 
+  background: url('/Fondo.jpg') no-repeat center center fixed;
+  background-size: cover;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 1rem;
+  height: 100vh;
 }
 
-/* Caja de login con fondo semitransparente, bordes redondeados y animación */
+/* Caja principal */
 .login-box {
-  background: rgba(255, 255, 255, 0.95);
+  width: 850px;
+  height: 600px;
+  display: flex;
+  background: url('/Fondo.jpg') no-repeat center center;
+  background-size: cover;
+  border-radius: 20px;
+  box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.4);
+  overflow: hidden;
+  backdrop-filter: blur(10px); /* Efecto de fondo difuminado */
+}
+
+/* Sección izquierda - Botones */
+.login-left {
+  width: 40%;
   padding: 2rem;
-  border-radius: 10px;
-  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 100, 0, 0.4);
   text-align: center;
-  max-width: 400px;
-  width: 100%;
-  animation: fadeIn 0.8s ease-in-out;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
 }
 
-/* Animación para una entrada suave */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(-20px); }
-  to { opacity: 1; transform: translateY(0); }
+.login-left h2 {
+  font-size: 2rem;
+  color: white;
+  font-weight: bold;
+  margin-bottom: 10px;
 }
-
-/* Título con tono verde oscuro */
-.login-box h2 {
-  font-size: 1.8rem;
-  color: #3D550C; /* Verde oscuro */
-  margin-bottom: 0.5rem;
-  font-family: "Georgia", serif;
-}
-
-/* Subtítulo */
-.login-box p {
+.login-left h3 {
   font-size: 1rem;
-  color: #555;
-  margin-bottom: 1.5rem;
+  color: white;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+.login-left p {
+  font-size: 1.1rem;
+  color: white;
+  margin-bottom: 20px;
 }
 
-/* Estilos para los inputs con transición y efecto focus */
-.login-box input {
+/* Botones de selección */
+.login-left button {
+  width: 80%;
+  padding: 12px;
+  font-size: 1rem;
+  background: white;
+  color: #006400;
+  border: 2px solid #006400;
+  border-radius: 25px;
+  cursor: pointer;
+  margin: 10px;
+  font-weight: bold;
+  transition: all 0.3s ease-in-out;
+}
+
+.login-left button:hover {
+  background: #006400;
+  color: white;
+  transform: scale(1.05);
+}
+
+/* Estilización del link de recuperar contraseña */
+.login-left a {
+  margin-top: 10px;
+  color: white;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: color 0.3s ease-in-out;
+}
+
+.login-left a:hover {
+  color: #c8ffc8;
+}
+
+/* Sección derecha - Logo y Formulario */
+.login-right {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  position: relative;
+}
+
+/* Logo arriba del formulario */
+.login-right .logo {
+  height: 180px;
+  margin-bottom: 20px;
+  position: absolute;
+  top: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* Formularios de inicio y registro */
+.login-right form {
   width: 100%;
-  padding: 10px;
-  margin: 10px 0;
-  border: 1px solid #ddd;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: fadeInDown 0.8s ease-in-out;
+}
+
+/* Inputs */
+.login-right input {
+  width: 85%;
+  padding: 12px;
+  font-size: 1rem;
+  margin-bottom: 15px;
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
   border-radius: 5px;
-  font-size: 1rem;
-  transition: border 0.3s ease;
-  
-  /* Texto en negro, fondo blanco */
-  color: #000; 
-  background-color: #fff;
-}
-
-/* Efecto focus */
-.login-box input:focus {
   outline: none;
-  border: 1px solid #3D550C; /* mismo tono verde */
+  transition: all 0.3s ease-in-out;
 }
 
-/* Sobrescribir estilos de autocompletado (Chrome, etc.) */
-input:-webkit-autofill,
-input:-webkit-autofill:hover,
-input:-webkit-autofill:focus {
-  -webkit-text-fill-color: #000;
-  -webkit-box-shadow: 0 0 0px 1000px #fff inset;
-  box-shadow: 0 0 0px 1000px #fff inset;
-  border: 1px solid #ddd;
+/* Efecto cuando se selecciona el input */
+.login-right input:focus {
+  background: white;
+  box-shadow: 0 0 10px rgba(0, 100, 0, 0.5);
 }
 
-/* Botón de envío con hover y transición para suavizar el cambio */
-.login-box button {
-  background-color: #3D550C; /* Verde oscuro */
+/* Botón de envío */
+.login-right button {
+  width: 85%;
+  padding: 12px;
+  font-size: 1rem;
+  background: #006400;
   color: white;
   border: none;
-  padding: 10px;
-  font-size: 1.2rem;
   border-radius: 5px;
   cursor: pointer;
-  width: 100%;
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
-  margin-top: 10px;
+  transition: all 0.3s ease-in-out;
 }
 
-.login-box button:hover {
-  background-color: #557C2B; /* Tono verde un poco más claro */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+.login-right button:hover {
+  background: #008000;
+  transform: scale(1.05);
 }
 
-/* Estilo para el mensaje de error */
-.error {
-  color: red;
-  margin-top: 10px;
-  font-size: 0.9rem;
+/* Animación para que el formulario baje y aparezca con opacidad */
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

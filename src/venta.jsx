@@ -3,6 +3,7 @@ import { collection, getDocs, addDoc, Timestamp } from "firebase/firestore";
 import { db } from "./DB/firebaseConfig";
 import Swal from "sweetalert2"; // Importar SweetAlert2
 import "./venta.css";
+import { doc, updateDoc } from "firebase/firestore";
 
 const Venta = () => {
     const [clientes, setClientes] = useState([]);
@@ -73,22 +74,11 @@ const Venta = () => {
             });
             return;
         }
-
-        let clienteData = {};
-        if (clienteFrecuente === "Sí" && clienteSeleccionado) {
-            clienteData = {
-                clienteFrecuente: true,
-                nombre: clienteSeleccionado.nombre,
-                rfc: clienteSeleccionado.rfc,
-            };
-        } else {
-            clienteData = {
-                clienteFrecuente: false,
-                nombre: nombreCliente || "Cliente no frecuente",
-                rfc: null,
-            };
-        }
-
+    
+        let clienteData = clienteFrecuente === "Sí" && clienteSeleccionado 
+            ? { clienteFrecuente: true, nombre: clienteSeleccionado.nombre, rfc: clienteSeleccionado.rfc } 
+            : { clienteFrecuente: false, nombre: nombreCliente || "Cliente no frecuente", rfc: null };
+    
         const nuevaVenta = {
             cliente: clienteData,
             productos: carrito.map((p) => ({
@@ -101,8 +91,7 @@ const Venta = () => {
             total: calcularTotal(),
             fecha: Timestamp.now(),
         };
-
-        // 🔥 **Confirmación antes de registrar la venta**
+    
         Swal.fire({
             title: "¿Registrar esta venta?",
             text: `Total a pagar: $${calcularTotal().toFixed(2)}`,
@@ -114,14 +103,39 @@ const Venta = () => {
             if (result.isConfirmed) {
                 try {
                     await addDoc(collection(db, "ventas"), nuevaVenta);
+    
+                    // 🔥 **Obtenemos la cantidad real antes de restar**
+                    for (const item of carrito) {
+                        const productoRef = doc(db, "inventario", item.id);
+                        
+                        // Obtener el producto actualizado desde Firebase
+                        const productoSnap = await getDocs(collection(db, "inventario"));
+                        const productoData = productoSnap.docs.find(doc => doc.id === item.id)?.data();
+    
+                        if (!productoData) continue;
+    
+                        // Nueva cantidad después de la venta
+                        const nuevaCantidad = Math.max(0, productoData.cantidad - item.cantidad);
+    
+                        // Actualizar cantidad en Firestore
+                        await updateDoc(productoRef, { cantidad: nuevaCantidad });
+    
+                        // Actualizar estado local
+                        setProductos((prevProductos) =>
+                            prevProductos.map((p) =>
+                                p.id === item.id ? { ...p, cantidad: nuevaCantidad } : p
+                            )
+                        );
+                    }
+    
                     Swal.fire({
                         icon: "success",
                         title: "Venta registrada con éxito",
                         showConfirmButton: false,
                         timer: 1500,
                     });
-
-                    // Limpiar estado después de registrar la venta
+    
+                    // Resetear estados
                     setClienteSeleccionado(null);
                     setNombreCliente("");
                     setProductoSeleccionado("");
@@ -138,6 +152,7 @@ const Venta = () => {
             }
         });
     };
+    
 
     return (
         <div className="venta-container">

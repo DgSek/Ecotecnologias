@@ -206,6 +206,10 @@ const Inventario = () => {
 
   return (
     <div className="inventario-container">
+      <img src="/muñoz_ecotec_resp_blue.png" alt="Logo" className="logo" />
+      <button className="btn-regresar" onClick={() => window.history.back()}>
+    ⬅️ Regresar
+  </button>
       <h1>Gestión de Inventario</h1>
       <button className="agregar-btn" onClick={handleAgregar}>
         Agregar Producto

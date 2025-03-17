@@ -10,7 +10,13 @@ const Home = () => {
     const navigate = useNavigate();
 
     return (
+        
+
         <div className="home-container">
+            <img src="/muñoz_ecotec_resp_blue.png" alt="Logo" className="logo" />
+            <button className="btn-regresar" onClick={() => window.history.back()}>
+    ⬅️ Cerrar sesion
+  </button>
             <h1>Menú Principal</h1>
             <div className="grid-container">
                 {/* Punto de Venta */}

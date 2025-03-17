@@ -103,6 +103,10 @@ const Prefactura = () => {
 
   return (
     <div className="prefactura-container">
+      <img src="/muñoz_ecotec_resp_blue.png" alt="Logo" className="logo" />
+      <button className="btn-regresar" onClick={() => window.history.back()}>
+    ⬅️ Regresar
+  </button>
       <h1>Pre-Facturación</h1>
       <div className="tabla-container">
         <table className="prefactura-tabla">

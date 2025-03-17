@@ -164,6 +164,11 @@ const Venta = () => {
       <div className="venta-content">
         <div className="sidebar">
           <div className="cliente-section">
+          <img src="/muñoz_ecotec_resp_blue.png" alt="Logo" className="logo" />
+          <button className="btn-regresar" onClick={() => window.history.back()}>
+    ⬅️ Regresar
+  </button>
+          
             <h3>¿Cliente Frecuente?</h3>
             <select
               value={clienteFrecuente}

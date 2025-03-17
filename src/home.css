@@ -9,6 +9,14 @@
   min-height: 100vh;
   padding: 2rem;
 }
+.logo {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  width: 150px; /* o ajusta según el tamaño deseado */
+  height: auto;
+  z-index: 10;
+}
 
 /* Título principal con color verde oscuro */
 .home-container h1 {

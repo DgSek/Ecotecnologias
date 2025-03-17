@@ -4,6 +4,35 @@ body {
     font-family: 'Arial', sans-serif;
     background: linear-gradient(135deg, #9fff9f, rgb(31, 99, 0));
   }
+  .logo {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: 150px; /* o ajusta según el tamaño deseado */
+    height: auto;
+    z-index: 10;
+  }
+  .btn-regresar {
+    position: absolute;
+    margin-top: 90px; /* Justo debajo del logo */
+    left: 20px;
+    background-color: #ffffff;
+    color: #3D550C;
+    border: 2px solid #3D550C;
+    border-radius: 5px;
+    padding: 8px 16px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 10;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  
+  .btn-regresar:hover {
+    background-color: #FFD482;
+    transform: scale(1.05);
+  }
+  
 
   
   /* Contenedor principal */

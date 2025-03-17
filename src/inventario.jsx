@@ -2,19 +2,29 @@ import React, { useState, useEffect } from "react";
 import { collection, getDocs, addDoc, updateDoc, deleteDoc, doc } from "firebase/firestore";
 import { reauthenticateWithCredential, EmailAuthProvider } from "firebase/auth";
 import Swal from "sweetalert2";
-import { db, auth } from "./DB/firebaseConfig";
+import { app, db, auth } from "./DB/firebaseConfig";
 import "./inventario.css";
+
+// Instancia secundaria para autenticar al responsable
+import { initializeApp } from "firebase/app";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+
+// Utiliza app.options en lugar de firebaseConfig
+const secondaryApp = initializeApp(app.options, "secondary");
+const secondaryAuth = getAuth(secondaryApp);
 
 const Inventario = () => {
   const [productos, setProductos] = useState([]);
   const [mostrarModal, setMostrarModal] = useState(false);
   const [editando, setEditando] = useState(null); // null si no se está editando
+
+  // Iniciamos cantidad y precio como cadenas vacías, no como 0
   const [nuevoProducto, setNuevoProducto] = useState({
     nombre: "",
     descripcion: "",
-    cantidad: 0,
+    cantidad: "",
     categoria: "",
-    precio: 0,
+    precio: "",
     fecha_ingreso: new Date().toISOString().split("T")[0],
   });
 
@@ -30,23 +40,22 @@ const Inventario = () => {
     obtenerInventario();
   }, []);
 
+  // Manejador para cambios en los inputs
   const handleChange = (e) => {
-    let { name, value } = e.target;
-    if (name === "cantidad" || name === "precio") {
-      value = Number(value);
-      if (value < 0) value = 0;
-    }
+    const { name, value } = e.target;
+    // Guardamos tal cual la cadena en el estado (sin forzar a número).
     setNuevoProducto({ ...nuevoProducto, [name]: value });
   };
 
   const handleAgregar = () => {
     setEditando(null);
+    // Reseteamos los campos a cadenas vacías
     setNuevoProducto({
       nombre: "",
       descripcion: "",
-      cantidad: 0,
+      cantidad: "",
       categoria: "",
-      precio: 0,
+      precio: "",
       fecha_ingreso: new Date().toISOString().split("T")[0],
     });
     setMostrarModal(true);
@@ -54,12 +63,28 @@ const Inventario = () => {
 
   const handleEditar = (producto) => {
     setEditando(producto.id);
-    setNuevoProducto(producto); // Carga los datos en el formulario
+    // Convertimos cantidad y precio a cadena para que no aparezca "0"
+    setNuevoProducto({
+      ...producto,
+      cantidad: String(producto.cantidad ?? ""),
+      precio: String(producto.precio ?? ""),
+    });
     setMostrarModal(true);
   };
 
   const guardarProducto = async () => {
-    if (!nuevoProducto.nombre || nuevoProducto.cantidad < 0 || nuevoProducto.precio < 0) {
+    // Parseamos cantidad y precio para validar
+    const parsedCantidad = parseFloat(nuevoProducto.cantidad);
+    const parsedPrecio = parseFloat(nuevoProducto.precio);
+
+    // Validamos que no estén vacíos y que sean >= 0
+    if (
+      !nuevoProducto.nombre ||
+      isNaN(parsedCantidad) ||
+      isNaN(parsedPrecio) ||
+      parsedCantidad < 0 ||
+      parsedPrecio < 0
+    ) {
       Swal.fire({
         title: "🚨 ¡Error!",
         text: "Todos los campos son obligatorios y no pueden ser negativos.",
@@ -73,13 +98,22 @@ const Inventario = () => {
     }
 
     try {
+      // Preparamos el objeto a guardar con cantidad y precio numéricos
+      const productoAguardar = {
+        ...nuevoProducto,
+        cantidad: parsedCantidad,
+        precio: parsedPrecio,
+      };
+
       if (editando) {
         // Editar producto
         const productoRef = doc(db, "inventario", editando);
-        await updateDoc(productoRef, nuevoProducto);
+        await updateDoc(productoRef, productoAguardar);
 
         setProductos(
-          productos.map((p) => (p.id === editando ? { id: editando, ...nuevoProducto } : p))
+          productos.map((p) =>
+            p.id === editando ? { id: editando, ...productoAguardar } : p
+          )
         );
 
         Swal.fire({
@@ -90,8 +124,8 @@ const Inventario = () => {
         });
       } else {
         // Agregar producto
-        const docRef = await addDoc(collection(db, "inventario"), nuevoProducto);
-        setProductos([...productos, { id: docRef.id, ...nuevoProducto }]);
+        const docRef = await addDoc(collection(db, "inventario"), productoAguardar);
+        setProductos([...productos, { id: docRef.id, ...productoAguardar }]);
 
         Swal.fire({
           title: "🎉 ¡Producto Agregado!",
@@ -110,14 +144,15 @@ const Inventario = () => {
       Swal.fire("Error", "Ocurrió un error al guardar el producto.", "error");
     }
 
+    // Cerrar modal y reset
     setMostrarModal(false);
     setEditando(null);
     setNuevoProducto({
       nombre: "",
       descripcion: "",
-      cantidad: 0,
+      cantidad: "",
       categoria: "",
-      precio: 0,
+      precio: "",
       fecha_ingreso: new Date().toISOString().split("T")[0],
     });
   };
@@ -145,9 +180,9 @@ const Inventario = () => {
       cancelButtonText: "Cancelar",
       showLoaderOnConfirm: true,
       preConfirm: async (password) => {
-        const credential = EmailAuthProvider.credential(user.email, password);
         try {
-          await reauthenticateWithCredential(user, credential);
+          // Autentica con la instancia secundaria usando el email del responsable
+          await signInWithEmailAndPassword(secondaryAuth, "responsable@ecotec.com", password);
           return true;
         } catch (error) {
           Swal.showValidationMessage("⚠️ Contraseña incorrecta");

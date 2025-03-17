@@ -43,12 +43,14 @@ body {
   font-weight: bold;
   margin-bottom: 10px;
 }
+
 .login-left h3 {
   font-size: 1rem;
   color: white;
   font-weight: bold;
   margin-bottom: 10px;
 }
+
 .login-left p {
   font-size: 1.1rem;
   color: white;
@@ -76,19 +78,6 @@ body {
   transform: scale(1.05);
 }
 
-/* Estilización del link de recuperar contraseña */
-.login-left a {
-  margin-top: 10px;
-  color: white;
-  text-decoration: none;
-  font-size: 0.9rem;
-  transition: color 0.3s ease-in-out;
-}
-
-.login-left a:hover {
-  color: #c8ffc8;
-}
-
 /* Sección derecha - Logo y Formulario */
 .login-right {
   width: 60%;
@@ -98,6 +87,19 @@ body {
   justify-content: center;
   padding: 2rem;
   position: relative;
+}
+.login-right input:-webkit-autofill,
+.login-right input:-webkit-autofill:hover,
+.login-right input:-webkit-autofill:focus,
+.login-right input:-webkit-autofill:active {
+  /* Elimina el fondo amarillo y rellena con blanco */
+  -webkit-box-shadow: 0 0 0 1000px white inset !important;
+  box-shadow: 0 0 0 1000px white inset !important;
+  background-color: #fff !important;
+
+  /* Fuerza el color de texto negro */
+  -webkit-text-fill-color: #000 !important;
+  color: #000 !important;
 }
 
 /* Logo arriba del formulario */
@@ -119,7 +121,7 @@ body {
   animation: fadeInDown 0.8s ease-in-out;
 }
 
-/* Inputs */
+/* Inputs: color de texto negro */
 .login-right input {
   width: 85%;
   padding: 12px;
@@ -130,12 +132,24 @@ body {
   border-radius: 5px;
   outline: none;
   transition: all 0.3s ease-in-out;
+  color: #000; /* <-- Texto negro */
 }
 
 /* Efecto cuando se selecciona el input */
 .login-right input:focus {
   background: white;
   box-shadow: 0 0 10px rgba(0, 100, 0, 0.5);
+}
+
+/* ====== Evitar el fondo amarillo de Chrome Autofill ====== */
+.login-right input:-webkit-autofill,
+.login-right input:-webkit-autofill:hover,
+.login-right input:-webkit-autofill:focus,
+.login-right input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 1000px white inset !important;
+  box-shadow: 0 0 0 1000px white inset !important;
+  background-color: #fff !important;
+  color: #000 !important;
 }
 
 /* Botón de envío */

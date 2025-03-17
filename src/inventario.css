@@ -1,5 +1,3 @@
-
-
 /* ====================  CONTENEDOR PRINCIPAL  ==================== */
 .inventario-container {
   padding: 30px;
@@ -76,10 +74,11 @@
 /* COLUMNA DE ACCIONES */
 .inventario-tabla td:last-child {
   text-align: center;
-}
-
-.inventario-tabla td:last-child button {
-  margin: 0 5px;
+  /* Usamos Flexbox para alinear y dar espacio entre los botones */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px; /* Espacio horizontal entre los botones */
 }
 
 /* ====================  BOTONES DE ACCIÓN  ==================== */

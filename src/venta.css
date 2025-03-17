@@ -143,7 +143,7 @@
   
   /* DETALLE DE VENTA */
   .venta-detalle {
-    flex: 1; /* Se expande para ocupar el resto del espacio */
+    flex: 2; /* Se expande para ocupar el resto del espacio */
     background: #fff;
     padding: 20px;
     border-radius: 10px;
